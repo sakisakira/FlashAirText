@@ -1,0 +1,485 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2F798165190AA2CA008CABA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798164190AA2CA008CABA4 /* Foundation.framework */; };
+		2F798167190AA2CA008CABA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798166190AA2CA008CABA4 /* CoreGraphics.framework */; };
+		2F798169190AA2CA008CABA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798168190AA2CA008CABA4 /* UIKit.framework */; };
+		2F79816F190AA2CA008CABA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F79816D190AA2CA008CABA4 /* InfoPlist.strings */; };
+		2F798171190AA2CA008CABA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798170190AA2CA008CABA4 /* main.m */; };
+		2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798174190AA2CA008CABA4 /* AppDelegate.m */; };
+		2F798178190AA2CA008CABA4 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F798176190AA2CA008CABA4 /* Main_iPhone.storyboard */; };
+		2F79817B190AA2CA008CABA4 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F798179190AA2CA008CABA4 /* Main_iPad.storyboard */; };
+		2F79817E190AA2CA008CABA4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F79817D190AA2CA008CABA4 /* ViewController.m */; };
+		2F798180190AA2CA008CABA4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F79817F190AA2CA008CABA4 /* Images.xcassets */; };
+		2F798187190AA2CA008CABA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798186190AA2CA008CABA4 /* XCTest.framework */; };
+		2F798188190AA2CA008CABA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798164190AA2CA008CABA4 /* Foundation.framework */; };
+		2F798189190AA2CA008CABA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798168190AA2CA008CABA4 /* UIKit.framework */; };
+		2F798191190AA2CA008CABA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F79818F190AA2CA008CABA4 /* InfoPlist.strings */; };
+		2F798193190AA2CA008CABA4 /* FlashAirTextTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2F79818A190AA2CA008CABA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2F798159190AA2C9008CABA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2F798160190AA2C9008CABA4;
+			remoteInfo = FlashAirText;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		2F798161190AA2CA008CABA4 /* FlashAirText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashAirText.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F798164190AA2CA008CABA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		2F798166190AA2CA008CABA4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		2F798168190AA2CA008CABA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		2F79816C190AA2CA008CABA4 /* FlashAirText-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlashAirText-Info.plist"; sourceTree = "<group>"; };
+		2F79816E190AA2CA008CABA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2F798170190AA2CA008CABA4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		2F798172190AA2CA008CABA4 /* FlashAirText-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FlashAirText-Prefix.pch"; sourceTree = "<group>"; };
+		2F798173190AA2CA008CABA4 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		2F798174190AA2CA008CABA4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		2F798177190AA2CA008CABA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		2F79817A190AA2CA008CABA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		2F79817C190AA2CA008CABA4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		2F79817D190AA2CA008CABA4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2F79817F190AA2CA008CABA4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		2F798185190AA2CA008CABA4 /* FlashAirTextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashAirTextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2F798186190AA2CA008CABA4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		2F79818E190AA2CA008CABA4 /* FlashAirTextTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlashAirTextTests-Info.plist"; sourceTree = "<group>"; };
+		2F798190190AA2CA008CABA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlashAirTextTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		2F79815E190AA2C9008CABA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F798167190AA2CA008CABA4 /* CoreGraphics.framework in Frameworks */,
+				2F798169190AA2CA008CABA4 /* UIKit.framework in Frameworks */,
+				2F798165190AA2CA008CABA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F798182190AA2CA008CABA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F798187190AA2CA008CABA4 /* XCTest.framework in Frameworks */,
+				2F798189190AA2CA008CABA4 /* UIKit.framework in Frameworks */,
+				2F798188190AA2CA008CABA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		2F798158190AA2C9008CABA4 = {
+			isa = PBXGroup;
+			children = (
+				2F79816A190AA2CA008CABA4 /* FlashAirText */,
+				2F79818C190AA2CA008CABA4 /* FlashAirTextTests */,
+				2F798163190AA2CA008CABA4 /* Frameworks */,
+				2F798162190AA2CA008CABA4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		2F798162190AA2CA008CABA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				2F798161190AA2CA008CABA4 /* FlashAirText.app */,
+				2F798185190AA2CA008CABA4 /* FlashAirTextTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		2F798163190AA2CA008CABA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2F798164190AA2CA008CABA4 /* Foundation.framework */,
+				2F798166190AA2CA008CABA4 /* CoreGraphics.framework */,
+				2F798168190AA2CA008CABA4 /* UIKit.framework */,
+				2F798186190AA2CA008CABA4 /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2F79816A190AA2CA008CABA4 /* FlashAirText */ = {
+			isa = PBXGroup;
+			children = (
+				2F798173190AA2CA008CABA4 /* AppDelegate.h */,
+				2F798174190AA2CA008CABA4 /* AppDelegate.m */,
+				2F798176190AA2CA008CABA4 /* Main_iPhone.storyboard */,
+				2F798179190AA2CA008CABA4 /* Main_iPad.storyboard */,
+				2F79817C190AA2CA008CABA4 /* ViewController.h */,
+				2F79817D190AA2CA008CABA4 /* ViewController.m */,
+				2F79817F190AA2CA008CABA4 /* Images.xcassets */,
+				2F79816B190AA2CA008CABA4 /* Supporting Files */,
+			);
+			path = FlashAirText;
+			sourceTree = "<group>";
+		};
+		2F79816B190AA2CA008CABA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F79816C190AA2CA008CABA4 /* FlashAirText-Info.plist */,
+				2F79816D190AA2CA008CABA4 /* InfoPlist.strings */,
+				2F798170190AA2CA008CABA4 /* main.m */,
+				2F798172190AA2CA008CABA4 /* FlashAirText-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2F79818C190AA2CA008CABA4 /* FlashAirTextTests */ = {
+			isa = PBXGroup;
+			children = (
+				2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */,
+				2F79818D190AA2CA008CABA4 /* Supporting Files */,
+			);
+			path = FlashAirTextTests;
+			sourceTree = "<group>";
+		};
+		2F79818D190AA2CA008CABA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				2F79818E190AA2CA008CABA4 /* FlashAirTextTests-Info.plist */,
+				2F79818F190AA2CA008CABA4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2F798160190AA2C9008CABA4 /* FlashAirText */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F798196190AA2CA008CABA4 /* Build configuration list for PBXNativeTarget "FlashAirText" */;
+			buildPhases = (
+				2F79815D190AA2C9008CABA4 /* Sources */,
+				2F79815E190AA2C9008CABA4 /* Frameworks */,
+				2F79815F190AA2C9008CABA4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlashAirText;
+			productName = FlashAirText;
+			productReference = 2F798161190AA2CA008CABA4 /* FlashAirText.app */;
+			productType = "com.apple.product-type.application";
+		};
+		2F798184190AA2CA008CABA4 /* FlashAirTextTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F798199190AA2CA008CABA4 /* Build configuration list for PBXNativeTarget "FlashAirTextTests" */;
+			buildPhases = (
+				2F798181190AA2CA008CABA4 /* Sources */,
+				2F798182190AA2CA008CABA4 /* Frameworks */,
+				2F798183190AA2CA008CABA4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				2F79818B190AA2CA008CABA4 /* PBXTargetDependency */,
+			);
+			name = FlashAirTextTests;
+			productName = FlashAirTextTests;
+			productReference = 2F798185190AA2CA008CABA4 /* FlashAirTextTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		2F798159190AA2C9008CABA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = sakira;
+				TargetAttributes = {
+					2F798184190AA2CA008CABA4 = {
+						TestTargetID = 2F798160190AA2C9008CABA4;
+					};
+				};
+			};
+			buildConfigurationList = 2F79815C190AA2C9008CABA4 /* Build configuration list for PBXProject "FlashAirText" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 2F798158190AA2C9008CABA4;
+			productRefGroup = 2F798162190AA2CA008CABA4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2F798160190AA2C9008CABA4 /* FlashAirText */,
+				2F798184190AA2CA008CABA4 /* FlashAirTextTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		2F79815F190AA2C9008CABA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F79817B190AA2CA008CABA4 /* Main_iPad.storyboard in Resources */,
+				2F798180190AA2CA008CABA4 /* Images.xcassets in Resources */,
+				2F798178190AA2CA008CABA4 /* Main_iPhone.storyboard in Resources */,
+				2F79816F190AA2CA008CABA4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F798183190AA2CA008CABA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F798191190AA2CA008CABA4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		2F79815D190AA2C9008CABA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F79817E190AA2CA008CABA4 /* ViewController.m in Sources */,
+				2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */,
+				2F798171190AA2CA008CABA4 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		2F798181190AA2CA008CABA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2F798193190AA2CA008CABA4 /* FlashAirTextTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		2F79818B190AA2CA008CABA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2F798160190AA2C9008CABA4 /* FlashAirText */;
+			targetProxy = 2F79818A190AA2CA008CABA4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		2F79816D190AA2CA008CABA4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F79816E190AA2CA008CABA4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		2F798176190AA2CA008CABA4 /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F798177190AA2CA008CABA4 /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		2F798179190AA2CA008CABA4 /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F79817A190AA2CA008CABA4 /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		2F79818F190AA2CA008CABA4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2F798190190AA2CA008CABA4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		2F798194190AA2CA008CABA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2F798195190AA2CA008CABA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		2F798197190AA2CA008CABA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
+				INFOPLIST_FILE = "FlashAirText/FlashAirText-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		2F798198190AA2CA008CABA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
+				INFOPLIST_FILE = "FlashAirText/FlashAirText-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		2F79819A190AA2CA008CABA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlashAirText.app/FlashAirText";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "FlashAirTextTests/FlashAirTextTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		2F79819B190AA2CA008CABA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/FlashAirText.app/FlashAirText";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
+				INFOPLIST_FILE = "FlashAirTextTests/FlashAirTextTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F79815C190AA2C9008CABA4 /* Build configuration list for PBXProject "FlashAirText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F798194190AA2CA008CABA4 /* Debug */,
+				2F798195190AA2CA008CABA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		2F798196190AA2CA008CABA4 /* Build configuration list for PBXNativeTarget "FlashAirText" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F798197190AA2CA008CABA4 /* Debug */,
+				2F798198190AA2CA008CABA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		2F798199190AA2CA008CABA4 /* Build configuration list for PBXNativeTarget "FlashAirTextTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2F79819A190AA2CA008CABA4 /* Debug */,
+				2F79819B190AA2CA008CABA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 2F798159190AA2C9008CABA4 /* Project object */;
+}
