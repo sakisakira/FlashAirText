@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0B1C45190BE31D009DCD30 /* FileProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B1C44190BE31D009DCD30 /* FileProperty.m */; };
+		2F0B1C48190BF400009DCD30 /* TextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F0B1C47190BF400009DCD30 /* TextViewController.m */; };
 		2F798165190AA2CA008CABA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798164190AA2CA008CABA4 /* Foundation.framework */; };
 		2F798167190AA2CA008CABA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798166190AA2CA008CABA4 /* CoreGraphics.framework */; };
 		2F798169190AA2CA008CABA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798168190AA2CA008CABA4 /* UIKit.framework */; };
@@ -15,7 +17,7 @@
 		2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798174190AA2CA008CABA4 /* AppDelegate.m */; };
 		2F798178190AA2CA008CABA4 /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F798176190AA2CA008CABA4 /* Main_iPhone.storyboard */; };
 		2F79817B190AA2CA008CABA4 /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F798179190AA2CA008CABA4 /* Main_iPad.storyboard */; };
-		2F79817E190AA2CA008CABA4 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F79817D190AA2CA008CABA4 /* ViewController.m */; };
+		2F79817E190AA2CA008CABA4 /* FileListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F79817D190AA2CA008CABA4 /* FileListViewController.m */; };
 		2F798180190AA2CA008CABA4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F79817F190AA2CA008CABA4 /* Images.xcassets */; };
 		2F798187190AA2CA008CABA4 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798186190AA2CA008CABA4 /* XCTest.framework */; };
 		2F798188190AA2CA008CABA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798164190AA2CA008CABA4 /* Foundation.framework */; };
@@ -35,6 +37,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2F0B1C43190BE31D009DCD30 /* FileProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FileProperty.h; sourceTree = "<group>"; };
+		2F0B1C44190BE31D009DCD30 /* FileProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FileProperty.m; sourceTree = "<group>"; };
+		2F0B1C46190BF400009DCD30 /* TextViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextViewController.h; sourceTree = "<group>"; };
+		2F0B1C47190BF400009DCD30 /* TextViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextViewController.m; sourceTree = "<group>"; };
 		2F798161190AA2CA008CABA4 /* FlashAirText.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlashAirText.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F798164190AA2CA008CABA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2F798166190AA2CA008CABA4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -47,8 +53,8 @@
 		2F798174190AA2CA008CABA4 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		2F798177190AA2CA008CABA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		2F79817A190AA2CA008CABA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		2F79817C190AA2CA008CABA4 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		2F79817D190AA2CA008CABA4 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		2F79817C190AA2CA008CABA4 /* FileListViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FileListViewController.h; sourceTree = "<group>"; };
+		2F79817D190AA2CA008CABA4 /* FileListViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FileListViewController.m; sourceTree = "<group>"; };
 		2F79817F190AA2CA008CABA4 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		2F798185190AA2CA008CABA4 /* FlashAirTextTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FlashAirTextTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F798186190AA2CA008CABA4 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -118,10 +124,14 @@
 				2F798174190AA2CA008CABA4 /* AppDelegate.m */,
 				2F798176190AA2CA008CABA4 /* Main_iPhone.storyboard */,
 				2F798179190AA2CA008CABA4 /* Main_iPad.storyboard */,
-				2F79817C190AA2CA008CABA4 /* ViewController.h */,
-				2F79817D190AA2CA008CABA4 /* ViewController.m */,
+				2F79817C190AA2CA008CABA4 /* FileListViewController.h */,
+				2F79817D190AA2CA008CABA4 /* FileListViewController.m */,
 				2F79817F190AA2CA008CABA4 /* Images.xcassets */,
 				2F79816B190AA2CA008CABA4 /* Supporting Files */,
+				2F0B1C43190BE31D009DCD30 /* FileProperty.h */,
+				2F0B1C44190BE31D009DCD30 /* FileProperty.m */,
+				2F0B1C46190BF400009DCD30 /* TextViewController.h */,
+				2F0B1C47190BF400009DCD30 /* TextViewController.m */,
 			);
 			path = FlashAirText;
 			sourceTree = "<group>";
@@ -253,8 +263,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2F79817E190AA2CA008CABA4 /* ViewController.m in Sources */,
+				2F0B1C48190BF400009DCD30 /* TextViewController.m in Sources */,
+				2F79817E190AA2CA008CABA4 /* FileListViewController.m in Sources */,
 				2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */,
+				2F0B1C45190BE31D009DCD30 /* FileProperty.m in Sources */,
 				2F798171190AA2CA008CABA4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -470,6 +482,7 @@
 				2F798198190AA2CA008CABA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		2F798199190AA2CA008CABA4 /* Build configuration list for PBXNativeTarget "FlashAirTextTests" */ = {
 			isa = XCConfigurationList;
@@ -478,6 +491,7 @@
 				2F79819B190AA2CA008CABA4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

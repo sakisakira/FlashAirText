@@ -10,4 +10,6 @@
 
 @interface TextViewController : UIViewController
 
+@property NSString *filePath;
+
 @end

@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  FileListViewController.h
 //  FlashAirText
 //
 //  Created by sakira on 2014/04/25.
@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+extern NSString *BaseURLString;
+
+@interface FileListViewController : UIViewController
+
+@property NSString* directory;
+@property (readonly) BOOL isRootDirectory;
 
 @end

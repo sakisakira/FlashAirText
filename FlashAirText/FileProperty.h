@@ -10,4 +10,8 @@
 
 @interface FileProperty : NSObject
 
+@property NSString *directory;
+@property NSString *filename;
+@property NSInteger size, attribute, date, time;
+
 @end
