@@ -9,5 +9,10 @@
 #import "FileProperty.h"
 
 @implementation FileProperty
+@dynamic isDirectory;
+
+- (BOOL)isDirectory {
+  return ((self.attribute & 0x10) != 0);
+}
 
 @end

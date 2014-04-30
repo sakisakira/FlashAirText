@@ -24,6 +24,7 @@
   CGRect originalTextViewRect, originalCloseButtonRect, originalUploadButtonRect;
   NSString *originalText;
 }
+@dynamic fileName, fileDirectory;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -89,14 +90,14 @@
                               error:&error];
   if (error) {
     NSLog(@"get file list error %@", error);
+    textView.text = originalText = @"";
     return;
   }
-  textView.text = str;
-  originalText = str;
+  textView.text = originalText = str;
 }
 
 - (void)setFileNameLabel {
-  fileNameLabel.text = [self fileName];
+  fileNameLabel.text = self.fileName;
 }
 
 - (NSString*)dateString {
@@ -115,8 +116,10 @@
   NSInteger hour = [dateCompnents hour] << 11;
   NSInteger minute = [dateCompnents minute]<< 5;
   NSInteger second = floor([dateCompnents second]/2);
-  NSString *datePart = [@"0x" stringByAppendingString:[NSString stringWithFormat:@"%x%x" ,
-                                                       year+month+day,hour+minute+second]];
+  NSString *datePart = [@"0x" stringByAppendingString:
+                        [NSString stringWithFormat:@"%x%x" ,
+                         (unsigned int)(year+month+day),
+                         (unsigned int)(hour+minute+second)]];
   return datePart;
 }
 
@@ -125,7 +128,7 @@
   [NSURL URLWithString:
    [BaseURLString stringByAppendingFormat:
     @"upload.cgi?WRITEPROTECT=ON&UPDIR=%@&FTIME=%@",
-    [self fileDirectory], [self dateString]]];
+    self.fileDirectory, [self dateString]]];
   // Run cgi
   NSError *error;
   NSString *rtnStr =[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:&error];

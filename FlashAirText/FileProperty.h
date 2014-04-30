@@ -14,4 +14,6 @@
 @property NSString *filename;
 @property NSInteger size, attribute, date, time;
 
+@property (readonly) BOOL isDirectory;
+
 @end

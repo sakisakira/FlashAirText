@@ -11,5 +11,6 @@
 @interface TextViewController : UIViewController
 
 @property NSString *filePath;
+@property (readonly) NSString *fileName, *fileDirectory;
 
 @end

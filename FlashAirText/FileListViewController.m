@@ -13,6 +13,7 @@
 //NSString *BaseURLString = @"http://flashair/";
 NSString *BaseURLString = @"http://192.168.0.1/";
 NSURL *BaseURL = nil;
+NSString *CurrentDirectoryKey = @"CurrentDirectory";
 
 @interface FileListViewController ()
 <UITableViewDelegate, UITableViewDataSource,
@@ -25,7 +26,9 @@ NSURL *BaseURL = nil;
   __weak IBOutlet UITableView *fileListTableView;
   
   NSArray *fileProperties;
-  NSInteger selectedIndex;
+  NSString *selectedFilename;
+  
+  NSString *currentDirectory;
 }
 
 @dynamic directory, isRootDirectory;
@@ -46,8 +49,26 @@ NSURL *BaseURL = nil;
   [super viewDidLoad];
 
   BaseURL = [NSURL URLWithString:BaseURLString];
+
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+  [super viewWillAppear:animated];
+
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  currentDirectory = [defs stringForKey:CurrentDirectoryKey];
+  if (currentDirectory)
+    self.directory = currentDirectory;
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+  [super viewWillDisappear:animated];
   
-  directoryNameLabel.text = @"pomera";
+  if (currentDirectory) {
+    NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+    [defs setObject:currentDirectory forKey:CurrentDirectoryKey];
+    [defs synchronize];
+  }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -64,7 +85,8 @@ NSURL *BaseURL = nil;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   TextViewController *vc = [segue destinationViewController];
-  vc.filePath = [self.directory stringByAppendingPathComponent:[fileProperties[selectedIndex] filename]];
+  vc.filePath = [self.directory stringByAppendingPathComponent:selectedFilename];
+  selectedFilename = nil;
 }
 
 #pragma mark - Communication
@@ -81,6 +103,15 @@ NSURL *BaseURL = nil;
                               error:&error];
   if (error) {
     NSLog(@"get file list error %@", error);
+    currentDirectory = nil;
+    
+    if (self.directory.length) {
+      NSMutableArray *comps = [self.directory pathComponents].mutableCopy;
+      [comps removeLastObject];
+      self.directory = [NSString pathWithComponents:comps];
+      [self fetchFileList];
+    }
+    
     return;
   }
   NSArray *files = [files_str componentsSeparatedByString:@"\n"];
@@ -96,8 +127,6 @@ NSURL *BaseURL = nil;
       prop.size = [comps[comps.count - 4] integerValue];
       prop.filename = [[comps subarrayWithRange:NSMakeRange(1, comps.count - 5)] componentsJoinedByString:@","];
       prop.directory = self.directory;
-      if (prop.attribute & 0x10)
-        prop.filename = [prop.filename stringByAppendingString:@"/"];
       [file_props addObject:prop];
     }
   }];
@@ -126,6 +155,8 @@ NSURL *BaseURL = nil;
   [fileListTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
                            atScrollPosition:UITableViewScrollPositionTop
                                    animated:NO];
+  
+  currentDirectory = self.directory;
 }
 
 
@@ -159,21 +190,24 @@ NSURL *BaseURL = nil;
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
   UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"FileListCell"
                                                           forIndexPath:indexPath];
-  cell.textLabel.text = [fileProperties[indexPath.row] filename];
+
+  FileProperty *prop = fileProperties[indexPath.row];
+  cell.textLabel.text = [prop.filename stringByAppendingString:prop.isDirectory ? @"/" : @""];
+ 
   return cell;
 }
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-  selectedIndex = indexPath.row;
-  FileProperty *prop = fileProperties[selectedIndex];
+  FileProperty *prop = fileProperties[indexPath.row];
+  selectedFilename = prop.filename;
   if ([prop.filename isEqualToString:@".."]) {
-    NSMutableArray *comp = [self.directory componentsSeparatedByString:@"/"].mutableCopy;
+    NSMutableArray *comp = [self.directory pathComponents].mutableCopy;
     [comp removeLastObject];
     self.directory = [comp componentsJoinedByString:@"/"];
     [self fetchFileList];
-  } else if (prop.attribute & 0x10) {
+  } else if (prop.isDirectory) {
     self.directory = [self.directory stringByAppendingPathComponent:prop.filename];
     [self fetchFileList];
   } else {
@@ -185,15 +219,7 @@ NSURL *BaseURL = nil;
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == 1) {
-    NSString *fname = [[alertView textFieldAtIndex:0] text];
-    NSMutableArray *fprops = fileProperties.mutableCopy;
-    
-    selectedIndex = fileProperties.count;
-    FileProperty *prop = [[FileProperty alloc] init];
-    prop.filename = fname;
-    prop.directory = self.directory;
-    [fprops insertObject:prop atIndex:0];
-    fileProperties = fprops;
+    selectedFilename = [[alertView textFieldAtIndex:0] text];
     [self performSegueWithIdentifier:@"TextViewController" sender:nil];
   }
 }
