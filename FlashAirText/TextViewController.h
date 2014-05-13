@@ -12,5 +12,6 @@
 
 @property NSString *filePath;
 @property (readonly) NSString *fileName, *fileDirectory;
+@property BOOL isNewFile;
 
 @end

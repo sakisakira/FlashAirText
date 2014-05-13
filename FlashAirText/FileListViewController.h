@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-extern NSString *BaseURLString;
+NSString* baseURLString(void);
 
 @interface FileListViewController : UIViewController
+
+- (void)fetchFileList;
 
 @property NSString* directory;
 @property (readonly) BOOL isRootDirectory;

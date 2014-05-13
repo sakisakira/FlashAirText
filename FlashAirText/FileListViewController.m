@@ -10,46 +10,69 @@
 #import "FileProperty.h"
 #import "TextViewController.h"
 
-//NSString *BaseURLString = @"http://flashair/";
-NSString *BaseURLString = @"http://192.168.0.1/";
-NSURL *BaseURL = nil;
-NSString *CurrentDirectoryKey = @"CurrentDirectory";
+static NSString *BaseURLKey = @"BaseURLKey";
+static NSString *CurrentDirectoryKey = @"CurrentDirectoryKey";
+
+static const NSInteger NewFileAlertViewTag = 100;
+static const NSInteger NotAliveAlertViewTag = 101;
+
+NSString* baseURLString(void) {
+  NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
+  NSString *url_str = [defs stringForKey:BaseURLKey];
+  if (!url_str) url_str = @"http://flashair/";
+  return url_str;
+}
 
 @interface FileListViewController ()
 <UITableViewDelegate, UITableViewDataSource,
- UIAlertViewDelegate>
+UIAlertViewDelegate>
+
+@property BOOL flashAirIsAlive;
 
 @end
 
 @implementation FileListViewController {
   __weak IBOutlet UILabel *directoryNameLabel;
   __weak IBOutlet UITableView *fileListTableView;
+  __weak IBOutlet UIButton *newFileButton;
   
   NSArray *fileProperties;
   NSString *selectedFilename;
+  NSString *_directory;
   
   NSString *currentDirectory;
+  BOOL isNewFile;
 }
 
-@dynamic directory, isRootDirectory;
+@dynamic directory, isRootDirectory, flashAirIsAlive;
 
 - (NSString*)directory {
-  return directoryNameLabel.text;
+  return _directory.copy;
 }
 
 - (void)setDirectory:(NSString *)directory_ {
-  directoryNameLabel.text = directory_;
+  _directory = directory_;
+  dispatch_async(dispatch_get_main_queue(), ^{
+    directoryNameLabel.text = directory_;
+  });
 }
 
 - (BOOL)isRootDirectory {
   return ([self.directory length] == 0);
 }
 
+- (BOOL)flashAirIsAlive {
+  return newFileButton.enabled;
+}
+
+- (void)setFlashAirIsAlive:(BOOL)alive {
+  newFileButton.enabled = alive;
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
-  BaseURL = [NSURL URLWithString:BaseURLString];
-
+  self.directory = @"";
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -59,6 +82,7 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
   currentDirectory = [defs stringForKey:CurrentDirectoryKey];
   if (currentDirectory)
     self.directory = currentDirectory;
+  self.flashAirIsAlive = NO;
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -74,7 +98,9 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
-  [self getListButtonPressed:nil];
+  dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    [self fetchFileList];
+  });
 }
 
 - (void)didReceiveMemoryWarning
@@ -85,16 +111,35 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
   TextViewController *vc = [segue destinationViewController];
+  vc.isNewFile = isNewFile;
   vc.filePath = [self.directory stringByAppendingPathComponent:selectedFilename];
   selectedFilename = nil;
+  isNewFile = NO;
 }
+
+- (void)openTextViewController {
+  if (!self.parentViewController) {
+    // iPhone series
+    [self performSegueWithIdentifier:@"TextViewController" sender:nil];
+  } else {
+    // iPad series
+    TextViewController *vc = self.parentViewController.childViewControllers[1];
+    vc.isNewFile = isNewFile;
+    vc.filePath = [self.directory stringByAppendingPathComponent:selectedFilename];
+    selectedFilename = nil;
+    isNewFile = NO;
+  }
+}
+
 
 #pragma mark - Communication
 
 - (void)fetchFileList {
+  selectedFilename = nil;
+  
   NSURL *cmd_url =
   [NSURL URLWithString:
-   [[BaseURLString stringByAppendingString:@"command.cgi?op=100&DIR=/"]
+   [[baseURLString() stringByAppendingString:@"command.cgi?op=100&DIR=/"]
     stringByAppendingString:self.directory]];
   NSError *error = nil;
   NSString *files_str =
@@ -104,16 +149,19 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
   if (error) {
     NSLog(@"get file list error %@", error);
     currentDirectory = nil;
+    self.flashAirIsAlive = NO;
     
     if (self.directory.length) {
       NSMutableArray *comps = [self.directory pathComponents].mutableCopy;
       [comps removeLastObject];
       self.directory = [NSString pathWithComponents:comps];
       [self fetchFileList];
+    } else {
+      [self showNotAliveAlertView];
     }
-    
     return;
   }
+  
   NSArray *files = [files_str componentsSeparatedByString:@"\n"];
   NSMutableArray *file_props = @[].mutableCopy;
   [files enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
@@ -151,19 +199,28 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
   }
   
   fileProperties = file_props;
-  [fileListTableView reloadData];
-  [fileListTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
-                           atScrollPosition:UITableViewScrollPositionTop
-                                   animated:NO];
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    [fileListTableView reloadData];
+    [fileListTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+                             atScrollPosition:UITableViewScrollPositionTop
+                                     animated:NO];
+  });
   
   currentDirectory = self.directory;
+  
+  dispatch_async(dispatch_get_main_queue(), ^{
+    self.flashAirIsAlive = YES;
+  });
 }
 
 
 #pragma mark - User Interface
 
 - (IBAction)getListButtonPressed:(id)sender {
-  [self fetchFileList];
+  dispatch_async(dispatch_get_global_queue(0, 0), ^{
+    [self fetchFileList];
+  });
 }
 
 - (IBAction)newFileButtonPressed:(id)sender {
@@ -172,10 +229,23 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
    initWithTitle:@"Filename."
    message:@"Input a new filename."
    delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"OK", nil];
+  dlg.tag = NewFileAlertViewTag;
   [dlg setAlertViewStyle:UIAlertViewStylePlainTextInput];
+  UITextField *tf = [dlg textFieldAtIndex:0];
+  tf.returnKeyType = UIReturnKeyDone;
+  tf.keyboardType = UIKeyboardTypeASCIICapable;
   [dlg show];
 }
 
+- (void)showNotAliveAlertView {
+  UIAlertView *dlg = [[UIAlertView alloc]
+                      initWithTitle:@"Connection Error"
+                      message:@"Cannot connect to a FlashAir."
+                      delegate:self
+                      cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+  dlg.tag = NotAliveAlertViewTag;
+  [dlg show];
+}
 
 #pragma mark - UITableViewDataSource
 
@@ -192,7 +262,8 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
                                                           forIndexPath:indexPath];
 
   FileProperty *prop = fileProperties[indexPath.row];
-  cell.textLabel.text = [prop.filename stringByAppendingString:prop.isDirectory ? @"/" : @""];
+  cell.textLabel.text = [prop.filename stringByAppendingString:
+                         (prop.isDirectory ? @"/" : @"")];
  
   return cell;
 }
@@ -205,22 +276,31 @@ NSString *CurrentDirectoryKey = @"CurrentDirectory";
   if ([prop.filename isEqualToString:@".."]) {
     NSMutableArray *comp = [self.directory pathComponents].mutableCopy;
     [comp removeLastObject];
-    self.directory = [comp componentsJoinedByString:@"/"];
+    self.directory = [NSString pathWithComponents:comp];
     [self fetchFileList];
   } else if (prop.isDirectory) {
     self.directory = [self.directory stringByAppendingPathComponent:prop.filename];
     [self fetchFileList];
   } else {
-    [self performSegueWithIdentifier:@"TextViewController" sender:nil];
+    [self openTextViewController];
   }
 }
 
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-  if (buttonIndex == 1) {
-    selectedFilename = [[alertView textFieldAtIndex:0] text];
-    [self performSegueWithIdentifier:@"TextViewController" sender:nil];
+  if (alertView.tag == NewFileAlertViewTag) {
+    if (buttonIndex == 1) {
+      NSMutableString *fn = [[alertView textFieldAtIndex:0] text].mutableCopy;
+      // todo: 必要に応じて.txtを付けるなど
+      selectedFilename = fn;
+      isNewFile = YES;
+      [self openTextViewController];
+    }
+  } else if (alertView.tag == NotAliveAlertViewTag) {
+    [self performSelector:@selector(fetchFileList)
+               withObject:nil
+               afterDelay:5];
   }
 }
 

@@ -23,8 +23,10 @@
   
   CGRect originalTextViewRect, originalCloseButtonRect, originalUploadButtonRect;
   NSString *originalText;
+  CGRect originalViewRect;
+  NSString *_filePath;
 }
-@dynamic fileName, fileDirectory;
+@dynamic fileName, fileDirectory, filePath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -35,12 +37,35 @@
     return self;
 }
 
+- (void)setFilePath:(NSString *)filePath {
+  _filePath = [filePath copy];
+  [self setFileNameLabel];
+  
+  if (self.isNewFile)
+    textView.text = @"";
+  else
+    [self loadTextFile];
+}
+
+- (NSString*)filePath {
+  return [_filePath copy];
+}
+
+- (NSString*)fileName {
+  return [[self.filePath pathComponents] lastObject];
+}
+
+- (NSString*)fileDirectory {
+  NSMutableArray *path_comps = [self.filePath pathComponents].mutableCopy;
+  [path_comps removeLastObject];
+  return [NSString pathWithComponents:path_comps];
+}
+
 - (void)viewDidLoad {
   [super viewDidLoad];
 
   originalTextViewRect = textView.frame;
-  originalCloseButtonRect = closeButton.frame;
-  originalUploadButtonRect = uploadButton.frame;
+  originalViewRect = self.view.frame;
 }
 
 - (void)didReceiveMemoryWarning
@@ -51,10 +76,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
   [super viewWillAppear:animated];
- 
+
   [self setFileNameLabel];
   [self loadTextFile];
-  
+ 
   hideKeyboardButton.enabled = NO;
   uploadButton.enabled = NO;
   
@@ -77,12 +102,40 @@
    removeObserver:self];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+  [super viewDidAppear:animated];
+
+  originalTextViewRect = textView.frame;
+  originalViewRect = self.view.frame;
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration {
+  [super willRotateToInterfaceOrientation:toInterfaceOrientation duration:duration];
+  
+  [textView resignFirstResponder];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+  [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+  
+  originalViewRect = self.view.frame;
+  originalTextViewRect = textView.frame;
+  
+  NSLog(@"original view rect changed to %@", [NSValue valueWithCGRect:originalViewRect]);
+}
+
 #pragma mark - Communication
 
 - (void)loadTextFile {
+  if (!self.filePath) {
+    NSLog(@"TextViewController#filePath has not been initialized.");
+    textView.text = originalText = @"";
+    return;
+  }
+  
   NSURL *cmd_url =
   [NSURL URLWithString:
-   [BaseURLString stringByAppendingString:self.filePath]];
+   [baseURLString() stringByAppendingString:self.filePath]];
   NSError *error = nil;
   NSString *str =
   [NSString stringWithContentsOfURL:cmd_url
@@ -93,7 +146,7 @@
     textView.text = originalText = @"";
     return;
   }
-  textView.text = originalText = str;
+  textView.text = originalText = [str stringByReplacingOccurrencesOfString:@"\r\n" withString:@"\n"];
 }
 
 - (void)setFileNameLabel {
@@ -110,14 +163,14 @@
                   | NSHourCalendarUnit
                   | NSMinuteCalendarUnit
                   | NSSecondCalendarUnit fromDate:systemdate];
-  NSInteger year =([dateCompnents year]-1980) << 9;
+  NSInteger year = ([dateCompnents year] - 1980) << 9;
   NSInteger month = ([dateCompnents month]) << 5;
   NSInteger day = [dateCompnents day];
   NSInteger hour = [dateCompnents hour] << 11;
   NSInteger minute = [dateCompnents minute]<< 5;
   NSInteger second = floor([dateCompnents second]/2);
   NSString *datePart = [@"0x" stringByAppendingString:
-                        [NSString stringWithFormat:@"%x%x" ,
+                        [NSString stringWithFormat:@"%04x%04x" ,
                          (unsigned int)(year+month+day),
                          (unsigned int)(hour+minute+second)]];
   return datePart;
@@ -126,7 +179,7 @@
 - (void)prepareForUpload {
   NSURL *url =
   [NSURL URLWithString:
-   [BaseURLString stringByAppendingFormat:
+   [baseURLString() stringByAppendingFormat:
     @"upload.cgi?WRITEPROTECT=ON&UPDIR=%@&FTIME=%@",
     self.fileDirectory, [self dateString]]];
   // Run cgi
@@ -153,7 +206,7 @@
   NSData *textData = [text dataUsingEncoding:NSShiftJISStringEncoding];
   //url
   NSURL *url = [NSURL URLWithString:
-                [BaseURLString stringByAppendingString:@"upload.cgi"]];
+                [baseURLString() stringByAppendingString:@"upload.cgi"]];
   //boundary
   CFUUIDRef uuid = CFUUIDCreate(nil);
   CFStringRef uuidString = CFUUIDCreateString(nil, uuid);
@@ -167,7 +220,7 @@
                     dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[[NSString stringWithFormat:
                      @"Content-Disposition: form-data; name=\"file\";filename=\"%@\"\r\n",
-                     [self fileName]]
+                     self.fileName]
           dataUsingEncoding:NSUTF8StringEncoding]];
   [body appendData:[[NSString stringWithFormat:@"Content-Type: text/plain\r\n\r\n"]
                     dataUsingEncoding:NSUTF8StringEncoding]];
@@ -199,16 +252,7 @@
     }
   }
   originalText = textView.text;
-}
-
-- (NSString*)fileName {
-  return [[self.filePath pathComponents] lastObject];
-}
-
-- (NSString*)fileDirectory {
-  NSMutableArray *path_comps = [self.filePath pathComponents].mutableCopy;
-  [path_comps removeLastObject];
-  return [path_comps componentsJoinedByString:@"/"];   
+  uploadButton.enabled = NO;
 }
 
 #pragma mark - User Interface
@@ -220,6 +264,12 @@
 - (IBAction)uploadButtonPressed:(id)sender {
   [self prepareForUpload];
   [self uploadData];
+  
+  if (self.parentViewController) {
+    // iPad series
+    FileListViewController *vc = self.parentViewController.childViewControllers[0];
+    [vc fetchFileList];
+  }
 }
 
 - (IBAction)hideKeyboardButtonPressed:(id)sender {
@@ -227,44 +277,54 @@
 }
 
 - (void)keyboardWillShow:(NSNotification*)noti {
-  CGRect keyboardFrameEnd = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+  CGRect kb_rect = [[noti.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
   
-  CGRect tv_rect = originalTextViewRect;
-  tv_rect.size.height -= keyboardFrameEnd.size.height;
+  UIInterfaceOrientation orientation =
+  [UIApplication sharedApplication].statusBarOrientation;
+  CGRect rect = originalViewRect;
+  CGRect tvrect = originalTextViewRect;
   
-  CGRect cb_rect = originalCloseButtonRect;
-  cb_rect.origin.y -= keyboardFrameEnd.size.height;
+  if (UIDeviceOrientationIsPortrait(orientation)) {
+    rect.size.height -= kb_rect.size.height;
+    tvrect.size.height -= kb_rect.size.height;
+  } else {
+    rect.size.width -= kb_rect.size.width;
+    if (kb_rect.origin.x == 0)
+      rect.origin.x = kb_rect.size.width;
+    tvrect.size.height -= kb_rect.size.width;
+  }
   
-  CGRect ub_rect = originalUploadButtonRect;
-  ub_rect.origin.y -= keyboardFrameEnd.size.height;
-  
-  [UIView animateWithDuration:0.5
-                   animations:
-   ^{
-     textView.frame = tv_rect;
-     closeButton.frame = cb_rect;
-     uploadButton.frame = ub_rect;
-   }];
-  
+  NSLog(@"original view rect %@", [NSValue valueWithCGRect:originalViewRect]);
+  NSLog(@"keyboard rect %@, view rect %@", [NSValue valueWithCGRect:kb_rect], [NSValue valueWithCGRect:rect]);
+  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
+
+  if (self.parentViewController) {
+    // iPad series
+    [UIView animateWithDuration:0.3 animations:^{textView.frame = tvrect;}];
+  } else {
+    // iPhone series
+    [UIView animateWithDuration:0.3 animations:^{self.view.frame = rect;}];
+  }
   hideKeyboardButton.enabled = YES;
+
+  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
+
 }
 
 - (void)keyboardWillHide:(NSNotification*)noti {
   [UIView animateWithDuration:0.5
                    animations:
    ^{
+     self.view.frame = originalViewRect;
      textView.frame = originalTextViewRect;
-     closeButton.frame = originalCloseButtonRect;
-     uploadButton.frame = originalUploadButtonRect;
    }];
-  
   hideKeyboardButton.enabled = NO;
 }
 
 #pragma mark - UITextViewDelegate
 
 - (void)textViewDidChange:(UITextView *)textView_ {
-  uploadButton.enabled = ![textView_.text isEqualToString:originalText];
+  uploadButton.enabled = (self.filePath && ![textView_.text isEqualToString:originalText]);
 }
 
 @end

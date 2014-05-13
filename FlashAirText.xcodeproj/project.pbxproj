@@ -24,6 +24,8 @@
 		2F798189190AA2CA008CABA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798168190AA2CA008CABA4 /* UIKit.framework */; };
 		2F798191190AA2CA008CABA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F79818F190AA2CA008CABA4 /* InfoPlist.strings */; };
 		2F798193190AA2CA008CABA4 /* FlashAirTextTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */; };
+		4E34A1871911EECB00851432 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E34A1861911EECB00851432 /* BaseViewController.m */; };
+		4E62B416191C96F900FDACD7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E62B415191C96F900FDACD7 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		2F79818E190AA2CA008CABA4 /* FlashAirTextTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlashAirTextTests-Info.plist"; sourceTree = "<group>"; };
 		2F798190190AA2CA008CABA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlashAirTextTests.m; sourceTree = "<group>"; };
+		4E34A1851911EECB00851432 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
+		4E34A1861911EECB00851432 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		4E62B415191C96F900FDACD7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +137,9 @@
 				2F0B1C44190BE31D009DCD30 /* FileProperty.m */,
 				2F0B1C46190BF400009DCD30 /* TextViewController.h */,
 				2F0B1C47190BF400009DCD30 /* TextViewController.m */,
+				4E34A1851911EECB00851432 /* BaseViewController.h */,
+				4E34A1861911EECB00851432 /* BaseViewController.m */,
+				4E62B415191C96F900FDACD7 /* Settings.bundle */,
 			);
 			path = FlashAirText;
 			sourceTree = "<group>";
@@ -212,6 +220,9 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = sakira;
 				TargetAttributes = {
+					2F798160190AA2C9008CABA4 = {
+						DevelopmentTeam = 3H2MK9FR2S;
+					};
 					2F798184190AA2CA008CABA4 = {
 						TestTargetID = 2F798160190AA2C9008CABA4;
 					};
@@ -243,6 +254,7 @@
 			files = (
 				2F79817B190AA2CA008CABA4 /* Main_iPad.storyboard in Resources */,
 				2F798180190AA2CA008CABA4 /* Images.xcassets in Resources */,
+				4E62B416191C96F900FDACD7 /* Settings.bundle in Resources */,
 				2F798178190AA2CA008CABA4 /* Main_iPhone.storyboard in Resources */,
 				2F79816F190AA2CA008CABA4 /* InfoPlist.strings in Resources */,
 			);
@@ -264,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F0B1C48190BF400009DCD30 /* TextViewController.m in Sources */,
+				4E34A1871911EECB00851432 /* BaseViewController.m in Sources */,
 				2F79817E190AA2CA008CABA4 /* FileListViewController.m in Sources */,
 				2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */,
 				2F0B1C45190BE31D009DCD30 /* FileProperty.m in Sources */,
@@ -402,6 +415,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
 				INFOPLIST_FILE = "FlashAirText/FlashAirText-Info.plist";
@@ -415,6 +429,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "FlashAirText/FlashAirText-Prefix.pch";
 				INFOPLIST_FILE = "FlashAirText/FlashAirText-Info.plist";
