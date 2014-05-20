@@ -24,7 +24,9 @@
 		2F798189190AA2CA008CABA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F798168190AA2CA008CABA4 /* UIKit.framework */; };
 		2F798191190AA2CA008CABA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2F79818F190AA2CA008CABA4 /* InfoPlist.strings */; };
 		2F798193190AA2CA008CABA4 /* FlashAirTextTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */; };
+		4E0F733F192B5E120074235D /* ADViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E0F733E192B5E120074235D /* ADViewController.m */; };
 		4E34A1871911EECB00851432 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E34A1861911EECB00851432 /* BaseViewController.m */; };
+		4E61CCBB1929BB0B00CBCB94 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E61CCBA1929BB0B00CBCB94 /* iAd.framework */; };
 		4E62B416191C96F900FDACD7 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 4E62B415191C96F900FDACD7 /* Settings.bundle */; };
 /* End PBXBuildFile section */
 
@@ -63,8 +65,11 @@
 		2F79818E190AA2CA008CABA4 /* FlashAirTextTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlashAirTextTests-Info.plist"; sourceTree = "<group>"; };
 		2F798190190AA2CA008CABA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		2F798192190AA2CA008CABA4 /* FlashAirTextTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlashAirTextTests.m; sourceTree = "<group>"; };
+		4E0F733D192B5E120074235D /* ADViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ADViewController.h; sourceTree = "<group>"; };
+		4E0F733E192B5E120074235D /* ADViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ADViewController.m; sourceTree = "<group>"; };
 		4E34A1851911EECB00851432 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		4E34A1861911EECB00851432 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
+		4E61CCBA1929BB0B00CBCB94 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		4E62B415191C96F900FDACD7 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,6 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4E61CCBB1929BB0B00CBCB94 /* iAd.framework in Frameworks */,
 				2F798167190AA2CA008CABA4 /* CoreGraphics.framework in Frameworks */,
 				2F798169190AA2CA008CABA4 /* UIKit.framework in Frameworks */,
 				2F798165190AA2CA008CABA4 /* Foundation.framework in Frameworks */,
@@ -114,6 +120,7 @@
 		2F798163190AA2CA008CABA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4E61CCBA1929BB0B00CBCB94 /* iAd.framework */,
 				2F798164190AA2CA008CABA4 /* Foundation.framework */,
 				2F798166190AA2CA008CABA4 /* CoreGraphics.framework */,
 				2F798168190AA2CA008CABA4 /* UIKit.framework */,
@@ -140,6 +147,8 @@
 				4E34A1851911EECB00851432 /* BaseViewController.h */,
 				4E34A1861911EECB00851432 /* BaseViewController.m */,
 				4E62B415191C96F900FDACD7 /* Settings.bundle */,
+				4E0F733D192B5E120074235D /* ADViewController.h */,
+				4E0F733E192B5E120074235D /* ADViewController.m */,
 			);
 			path = FlashAirText;
 			sourceTree = "<group>";
@@ -280,6 +289,7 @@
 				2F79817E190AA2CA008CABA4 /* FileListViewController.m in Sources */,
 				2F798175190AA2CA008CABA4 /* AppDelegate.m in Sources */,
 				2F0B1C45190BE31D009DCD30 /* FileProperty.m in Sources */,
+				4E0F733F192B5E120074235D /* ADViewController.m in Sources */,
 				2F798171190AA2CA008CABA4 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

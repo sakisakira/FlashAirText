@@ -7,13 +7,13 @@
 //
 
 #import "AppDelegate.h"
+#import "BaseViewController.h"
+#import "ADViewController.h"
 
 @implementation AppDelegate
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    // Override point for customization after application launch.
-    return YES;
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+  return YES;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

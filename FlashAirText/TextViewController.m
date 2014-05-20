@@ -8,9 +8,11 @@
 
 #import "TextViewController.h"
 #import "FileListViewController.h"
+#import "ADViewController.h"
 
 @interface TextViewController ()
-<UITextViewDelegate>
+<UITextViewDelegate,
+UIAlertViewDelegate>
 
 @end
 
@@ -121,7 +123,7 @@
   originalViewRect = self.view.frame;
   originalTextViewRect = textView.frame;
   
-  NSLog(@"original view rect changed to %@", [NSValue valueWithCGRect:originalViewRect]);
+//  NSLog(@"original view rect changed to %@", [NSValue valueWithCGRect:originalViewRect]);
 }
 
 #pragma mark - Communication
@@ -238,6 +240,8 @@
                                          returningResponse:&response
                                                      error:&error];
   NSString *rtnStr = [[NSString alloc] initWithData:result encoding:NSUTF8StringEncoding];
+  NSLog(@"upload result: %@", rtnStr);
+  
   if ([error.domain isEqualToString:NSCocoaErrorDomain]){
     NSLog(@"upload.cgi %@\n",error);
     return;
@@ -258,7 +262,17 @@
 #pragma mark - User Interface
 
 - (IBAction)closeButtonPressed:(id)sender {
-  [self dismissViewControllerAnimated:YES completion:nil];
+  if (uploadButton.enabled) {
+    [[[UIAlertView alloc]
+      initWithTitle:@"Closing Modified File"
+      message:@"This file has been modified.  Are you sure to close it?"
+      delegate:self
+      cancelButtonTitle:@"Cancel"
+      otherButtonTitles:@"Close", nil]
+     show];
+  } else {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
 - (IBAction)uploadButtonPressed:(id)sender {
@@ -286,17 +300,17 @@
   
   if (UIDeviceOrientationIsPortrait(orientation)) {
     rect.size.height -= kb_rect.size.height;
-    tvrect.size.height -= kb_rect.size.height;
+    tvrect.size.height -= (kb_rect.size.height - ADBannerHeight_iPad);
   } else {
     rect.size.width -= kb_rect.size.width;
     if (kb_rect.origin.x == 0)
       rect.origin.x = kb_rect.size.width;
-    tvrect.size.height -= kb_rect.size.width;
+    tvrect.size.height -= (kb_rect.size.width - ADBannerHeight_iPad);
   }
   
-  NSLog(@"original view rect %@", [NSValue valueWithCGRect:originalViewRect]);
-  NSLog(@"keyboard rect %@, view rect %@", [NSValue valueWithCGRect:kb_rect], [NSValue valueWithCGRect:rect]);
-  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
+//  NSLog(@"original view rect %@", [NSValue valueWithCGRect:originalViewRect]);
+//  NSLog(@"keyboard rect %@, view rect %@", [NSValue valueWithCGRect:kb_rect], [NSValue valueWithCGRect:rect]);
+//  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
 
   if (self.parentViewController) {
     // iPad series
@@ -307,7 +321,7 @@
   }
   hideKeyboardButton.enabled = YES;
 
-  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
+//  NSLog(@"textView.rect %@, orig %@, tvrect %@", [NSValue valueWithCGRect:textView.frame], [NSValue valueWithCGRect:originalTextViewRect], [NSValue valueWithCGRect:tvrect]);
 
 }
 
@@ -325,6 +339,14 @@
 
 - (void)textViewDidChange:(UITextView *)textView_ {
   uploadButton.enabled = (self.filePath && ![textView_.text isEqualToString:originalText]);
+}
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+  if (buttonIndex == 1) {
+    [self dismissViewControllerAnimated:YES completion:nil];
+  }
 }
 
 @end

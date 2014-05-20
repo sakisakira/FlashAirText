@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13D65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
@@ -56,9 +56,20 @@
                                     <action selector="newFileButtonPressed:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="JUg-Yd-5qC"/>
                                 </connections>
                             </button>
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="8DD-sU-gWT">
+                                <rect key="frame" x="0.0" y="524" width="320" height="50"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="Oau-94-1wM"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="Dtj-RQ-8Zz"/>
+                                </connections>
+                            </adBannerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="8DD-sU-gWT" secondAttribute="trailing" id="8u1-5D-MFv"/>
                             <constraint firstItem="o3L-qU-YZg" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="BLo-wi-Jg0"/>
                             <constraint firstItem="vCD-x0-a9e" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="Cq9-1L-cfv"/>
                             <constraint firstItem="o3L-qU-YZg" firstAttribute="top" secondItem="vCD-x0-a9e" secondAttribute="bottom" constant="8" symbolic="YES" id="EeP-Sd-fxt"/>
@@ -66,14 +77,17 @@
                             <constraint firstItem="TPT-vL-o9u" firstAttribute="top" secondItem="o3L-qU-YZg" secondAttribute="bottom" constant="8" symbolic="YES" id="Mrc-BC-9fs"/>
                             <constraint firstItem="o3L-qU-YZg" firstAttribute="top" secondItem="vCD-x0-a9e" secondAttribute="bottom" constant="8" symbolic="YES" id="N8w-ln-XWe"/>
                             <constraint firstAttribute="trailing" secondItem="vCD-x0-a9e" secondAttribute="trailing" constant="20" symbolic="YES" id="UuW-XA-g3W"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TPT-vL-o9u" secondAttribute="bottom" id="Ys3-Yn-zvq"/>
                             <constraint firstItem="o3L-qU-YZg" firstAttribute="top" secondItem="vCD-x0-a9e" secondAttribute="bottom" constant="8" symbolic="YES" id="ZNt-Pi-oKJ"/>
                             <constraint firstItem="o3L-qU-YZg" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="20" symbolic="YES" id="dFY-x0-IM4"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="bottom" secondItem="8DD-sU-gWT" secondAttribute="bottom" id="kTs-ut-w4M"/>
                             <constraint firstItem="TPT-vL-o9u" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="qNW-uG-5T8"/>
+                            <constraint firstItem="8DD-sU-gWT" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="rZI-bt-aq3"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="TPT-vL-o9u" secondAttribute="bottom" id="ujA-cS-0UJ"/>
                             <constraint firstItem="vCD-x0-a9e" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="20" symbolic="YES" id="yee-Kk-ESH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="ADBanner" destination="8DD-sU-gWT" id="rj0-Iw-atC"/>
                         <outlet property="directoryNameLabel" destination="vCD-x0-a9e" id="Iru-qV-wUU"/>
                         <outlet property="fileListTableView" destination="TPT-vL-o9u" id="PhN-qq-NMG"/>
                         <outlet property="newFileButton" destination="o3L-qU-YZg" id="gx1-Jh-72c"/>

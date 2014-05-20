@@ -6,6 +6,8 @@
 //  Copyright (c) 2014年 sakira. All rights reserved.
 //
 
+@import iAd;
+
 #import "FileListViewController.h"
 #import "FileProperty.h"
 #import "TextViewController.h"
@@ -16,6 +18,8 @@ static NSString *CurrentDirectoryKey = @"CurrentDirectoryKey";
 static const NSInteger NewFileAlertViewTag = 100;
 static const NSInteger NotAliveAlertViewTag = 101;
 
+static const CGFloat ADBannerHeight = 50.0f;
+
 NSString* baseURLString(void) {
   NSUserDefaults *defs = [NSUserDefaults standardUserDefaults];
   NSString *url_str = [defs stringForKey:BaseURLKey];
@@ -25,7 +29,8 @@ NSString* baseURLString(void) {
 
 @interface FileListViewController ()
 <UITableViewDelegate, UITableViewDataSource,
-UIAlertViewDelegate>
+UIAlertViewDelegate,
+ADBannerViewDelegate>
 
 @property BOOL flashAirIsAlive;
 
@@ -35,6 +40,7 @@ UIAlertViewDelegate>
   __weak IBOutlet UILabel *directoryNameLabel;
   __weak IBOutlet UITableView *fileListTableView;
   __weak IBOutlet UIButton *newFileButton;
+  __weak IBOutlet ADBannerView *ADBanner;
   
   NSArray *fileProperties;
   NSString *selectedFilename;
@@ -98,9 +104,8 @@ UIAlertViewDelegate>
 - (void)viewDidAppear:(BOOL)animated {
   [super viewDidAppear:animated];
   
-  dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    [self fetchFileList];
-  });
+  [self performSelectorInBackground:@selector(fetchFileList)
+                         withObject:nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -218,9 +223,7 @@ UIAlertViewDelegate>
 #pragma mark - User Interface
 
 - (IBAction)getListButtonPressed:(id)sender {
-  dispatch_async(dispatch_get_global_queue(0, 0), ^{
-    [self fetchFileList];
-  });
+  [self performSelectorInBackground:@selector(fetchFileList) withObject:nil];
 }
 
 - (IBAction)newFileButtonPressed:(id)sender {
@@ -277,10 +280,10 @@ UIAlertViewDelegate>
     NSMutableArray *comp = [self.directory pathComponents].mutableCopy;
     [comp removeLastObject];
     self.directory = [NSString pathWithComponents:comp];
-    [self fetchFileList];
+    [self performSelectorInBackground:@selector(fetchFileList) withObject:nil];
   } else if (prop.isDirectory) {
     self.directory = [self.directory stringByAppendingPathComponent:prop.filename];
-    [self fetchFileList];
+    [self performSelectorInBackground:@selector(fetchFileList) withObject:nil];
   } else {
     [self openTextViewController];
   }
@@ -292,16 +295,43 @@ UIAlertViewDelegate>
   if (alertView.tag == NewFileAlertViewTag) {
     if (buttonIndex == 1) {
       NSMutableString *fn = [[alertView textFieldAtIndex:0] text].mutableCopy;
-      // todo: 必要に応じて.txtを付けるなど
+      NSRange range = [fn rangeOfString:@"."];
+      if (!range.length) [fn appendString:@".txt"];
       selectedFilename = fn;
       isNewFile = YES;
       [self openTextViewController];
     }
   } else if (alertView.tag == NotAliveAlertViewTag) {
-    [self performSelector:@selector(fetchFileList)
+    dispatch_async(dispatch_get_global_queue(0, 0), ^{
+      [self performSelector:@selector(fetchFileList)
                withObject:nil
-               afterDelay:5];
+               afterDelay:3];
+    });
   }
+}
+
+#pragma mark - ADBannerViewDelegate
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner {
+  CGRect frame = banner.frame;
+  frame.size.height = ADBannerHeight;
+  [UIView animateWithDuration:0.3
+                   animations:
+   ^{
+     banner.frame = frame;
+     banner.alpha = 1;
+   }];
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error {
+  CGRect frame = banner.frame;
+  frame.size.height = 0;
+  [UIView animateWithDuration:0.3
+                   animations:
+   ^{
+     banner.frame = frame;
+     banner.alpha = 0;
+   }];
 }
 
 @end
