@@ -47,6 +47,8 @@ UIAlertViewDelegate>
     textView.text = @"";
   else
     [self loadTextFile];
+
+  textView.editable = YES;
 }
 
 - (NSString*)filePath {
@@ -65,6 +67,8 @@ UIAlertViewDelegate>
 
 - (void)viewDidLoad {
   [super viewDidLoad];
+
+  textView.editable = NO;
 
   originalTextViewRect = textView.frame;
   originalViewRect = self.view.frame;
@@ -271,6 +275,7 @@ UIAlertViewDelegate>
       otherButtonTitles:@"Close", nil]
      show];
   } else {
+    textView.editable = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
@@ -345,6 +350,7 @@ UIAlertViewDelegate>
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
   if (buttonIndex == 1) {
+    textView.editable = NO;
     [self dismissViewControllerAnimated:YES completion:nil];
   }
 }
